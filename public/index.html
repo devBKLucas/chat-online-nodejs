@@ -14,7 +14,7 @@
     <form id="chat">
         <input type="text" name="username" placeholder="Digite seu usuario">
         <div class="messages"></div>
-        <input type="text" name="message" placeholder="Digite sua mensagem">
+        <input id="message-input" type="text" name="message" placeholder="Digite sua mensagem">
         <button type="submit">Enviar</button>
     </form>
 
@@ -23,13 +23,17 @@
 
         function renderMessage(message) {
             $('.messages').append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
+            $('#message-input').val("");
         }
 
+
+        /* Para guardar as mensagens
         socket.on('previousMessages', function(messages){
             for(message of messages) {
                 renderMessage(message)
             }
         })
+        */
 
         socket.on('receivedMessage', function(message) {
             renderMessage(message)
