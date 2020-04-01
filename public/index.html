@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Online By Lucas</title>
+    <title>Procyon - Seu chat online</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
@@ -11,21 +11,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form id="chat">
-        <input type="text" name="username" placeholder="Digite seu usuario">
-        <div class="messages"></div>
-        <input id="message-input" type="text" name="message" placeholder="Digite sua mensagem">
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="container">
+        <form id="chat">
+            <input type="text" name="username" placeholder="Digite seu nome:">
+            <div class="messages"></div>
+            <input id="message-input" type="text" name="message" placeholder="Digite sua mensagem...">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 
     <script type="text/javascript">
         var socket = io("https://chat-online-node.herokuapp.com/")
 
         function renderMessage(message) {
             $('.messages').append('<div class="message"><strong>' + message.author + '</strong>: ' + message.message + '</div>')
-            $('#message-input').val("");
+            $('#message-input').val("")
+            $().ready(function(){
+            $(".messages").animate({ scrollTop: 1000 }, 0)})
         }
 
+        
 
         /* Para guardar as mensagens
         socket.on('previousMessages', function(messages){
